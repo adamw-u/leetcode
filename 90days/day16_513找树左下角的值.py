@@ -46,3 +46,19 @@ class Solution:
             if node.left:
                 queue.append(node.left)
         return left
+    
+    def findBottomLeftValue(self, root: TreeNode) -> int:
+        def dfs(node, level):
+            if not node.left and not node.right:
+                if level > res[1]:
+                    res[0] = node.val
+                    res[1] = level
+                return
+            if node.left:
+                dfs(node.left, level + 1)
+            if node.right:
+                dfs(node.right, level + 1)
+        
+        res = [0, -1] # 分别记录结果和高度
+        dfs(root, 0)
+        return res[0]

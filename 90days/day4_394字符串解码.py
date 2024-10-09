@@ -31,6 +31,15 @@
 # 输出："abccdcdcdxyz"
 
 class Solution(object):
+    """
+    思路：
+        1.初始化一个空栈
+        2.字符串依次入栈，直到遇到]
+            2.1 开始出栈，直到遇到[，把[前的元素记录到words中
+            2.2 把数字记录到nums中，直到stack为空或者stack[-1]不是数值
+            2.3 words*nums
+        3.words*nums添加到栈中，继续重复第2步
+    """
     def decodeString(self, s):
         stack = []
 

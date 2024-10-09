@@ -22,12 +22,16 @@
 # 解释:
 # 两个回旋镖为 [[1,0],[0,0],[2,0]] 和 [[1,0],[2,0],[0,0]]
 from collections import defaultdict
+from typing import List
 class Solution:
     def numberOfBoomerangs(self, points: List[List[int]]) -> int:
+
         def distance(x, y):
             return (x[0] - y[0])**2 + (x[1]-y[1])**2
+        
         res = 0 
         for i in range(len(points)):
+            # 固定一个点，选另外两个与他的距离一样(i, j, k) 
             hash_map = defaultdict(int)
             for j in range(len(points)):
                 if i != j:

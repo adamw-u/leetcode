@@ -38,7 +38,7 @@ class Solution:
                 # 我们需要将融合后的区块的最大值重新放回栈
                 # 而 stack 是递增的，因此 stack[-1] 是最大的
                 cur = stack[-1]
-                # 维持栈的单调递增
+                # 维持栈的单调递增，有下到上递增
                 while stack and stack[-1] > a: 
                     stack.pop()
                 stack.append(cur)

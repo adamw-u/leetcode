@@ -13,6 +13,13 @@
 
 
 def detectCycle(self, head) :
+    """
+    # https://leetcode.cn/problems/linked-list-cycle-ii/solutions/1999271/mei-xiang-ming-bai-yi-ge-shi-pin-jiang-t-nvsq/
+    思路：
+        1.环外长度a， slow走了 a+b 与 fast相遇 ，fast假设走了n圈环，则fast总距离 = a+n(b+c)+b = 2(a+b) (fast走的距离是slow的2倍)
+        2.(n-1)(b+c) = a-c > head走c步后与slow走c步后在环入口相遇
+        3.具体解释可以理解为 b+c是一个完整的环，我们设b+c==0,则a==c，代表在链表起点走a步和在b走c步同时到达环的入口
+    """
     fast = slow = head 
     while fast and  fast.next:
         fast = fast.next.next
@@ -24,6 +31,3 @@ def detectCycle(self, head) :
             return slow
     
     return None
-
-# https://leetcode.cn/problems/linked-list-cycle-ii/solutions/1999271/mei-xiang-ming-bai-yi-ge-shi-pin-jiang-t-nvsq/
-# 环外长度a， slow走了 a+b 与 fast相遇 ，fast假设走了n圈，则fast总距离 = a+n(b+c)+b = 2(a+b) > (n-1)(b+c) = a-c > head走c步后与slow走c步后在环入口相遇

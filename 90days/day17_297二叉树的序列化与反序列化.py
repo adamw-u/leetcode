@@ -58,6 +58,24 @@ class Codec:
         
         return dfs(data.split(','), 0)[0]
     
+    def deserialize(self, data):
+        """Decodes your encoded data to tree.
+        
+        :type data: str
+        :rtype: TreeNode
+        """
+        def dfs (data):
+            val = data.pop(0)   # 利用列表pop
+            if val=='null':
+                return None 
+            root = TreeNode(int(val))
+            root.left = dfs(data)
+            root.right = dfs(data) 
+            return root
+            
+        data = data.split(',')
+        return dfs(data)
+    
 
 from collections import deque
 class Codec:
@@ -96,11 +114,13 @@ class Codec:
         i = 1
         while i < n - 1:
             node = queue.popleft()  # 借助队列实现树的构造
+            
             q1 = TreeNode(data.pop(0))
             i += 1
             if q1 != 'null':
                 node.left = q1 
                 queue.append(node.left)
+            
             q2 = TreeNode(data.pop(0))
             i += 1
             if q2 != 'null':

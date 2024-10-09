@@ -46,6 +46,19 @@
 # 每个结点值介于 0 和 1000 之间。
 
 class Solution:
+    """
+    思路：
+        1.设tuple(y, x, val)分别存储了 列、行、root.val三个值
+        2.中序遍历进行存储 
+        3.以[1,2,3,4,5,6,7]为例，其数据机构为
+            <0, 0, 1>
+            <-1,1, 2>
+            <-2,2, 4>
+            <0, 2, 6>
+            <1, 1, 3>
+            <0, 2, 5>
+            <2, 2, 7>
+    """
     def verticalTraversal(self, root):
         def dfs(root, res , y, x):
             if not root:

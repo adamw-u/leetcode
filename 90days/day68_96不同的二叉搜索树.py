@@ -30,6 +30,19 @@ class Solution(object):
         dp[2] = 2
         dp[3] = dp[1] + dp[0] * dp[2] + dp[2] * dp[0]
         https://leetcode.cn/problems/unique-binary-search-trees/solutions/1153659/96-bu-tong-de-er-cha-sou-suo-shu-python-uuysm/?source=vscode
+
+        比如[1,2,3,4,5,6] 此时需要求出dp[6]
+        首先看1和6，其左侧（右侧）无数，为dp[0]，右侧（左侧）为5个连续的数，为dp[5]，则他们各自可以排成的树个数为dp[0] * dp[5]
+        2和5，可排成的树个数为dp[1] * dp[4]
+        3和4则为dp[2] * dp[3]
+        那么dp[6] = sum(
+        1:dp[0] * dp[5]
+        2:dp[1] * dp[4]
+        3:dp[2] * dp[3]
+        4:dp[3] * dp[2]
+        5:dp[4] * dp[1]
+        6:dp[5] * dp[0]
+        )
         """
         dp = [0] * (n +1)
         dp[0] = 1

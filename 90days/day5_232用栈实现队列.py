@@ -27,29 +27,35 @@
 # 假设所有操作都是有效的、 （例如，一个空的队列不会调用 pop 或者 peek 操作）。
 
 class Queue():
-    def __init__(self) -> None:
-        self.stack_in = [] 
+    """
+    思路：
+        1.用List维护两个栈
+        2.入栈List append
+        3.出栈，将入栈中的元素倒序加入到出栈中，模拟队列pop()
+    """
+    def __init__(self):
+        self.stack_in = []
         self.stack_out = []
-    
-    def push(self, x):
+
+    def push(self, x: int) -> None:
         self.stack_in.append(x)
-    
-    def pop(self):
+
+    def pop(self) -> int:
         # 栈特性是LIFO(Last In First Out)
-        # 如果将栈转成队列FIFO，例如queue.push(1);queue.push(2);  栈的pop--2 队列pop--1  需要维护一个出栈即先将进栈中元素转到出LIFO+LIFO->FIFO
-        if self.stack_out:
+        # 如果将栈转成队列FIFO，例如queue.push(1);queue.push(2);  栈的pop->2 队列pop->1  需要维护一个出栈即先将进栈中元素转到出LIFO+LIFO->FIFO
+        if not self.stack_out:
             while self.stack_in:
                 self.stack_out.append(self.stack_in.pop())
         return self.stack_out.pop()
-    
-    def peek(self):
-        if self.stack_out:
+
+    def peek(self) -> int:
+        if not self.stack_out:
             while self.stack_in:
                 self.stack_out.append(self.stack_in.pop())
         return self.stack_out[-1]
-    
-    def empty(self):
-        if not self.stack_in and self.stack_out:
-            return True 
-        else:
-            return False
+
+
+    def empty(self) -> bool:
+        if not self.stack_in and not self.stack_out:
+            return True
+        return False

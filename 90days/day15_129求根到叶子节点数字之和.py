@@ -36,6 +36,7 @@
 # 从根到叶子节点路径 4->9->1 代表数字 491.
 # 从根到叶子节点路径 4->0 代表数字 40.
 # 因此，数字总和 = 495 + 491 + 40 = 1026.
+from collections import deque
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -65,3 +66,28 @@ def sumNumbers(root: Optional[TreeNode]) -> int:
             return dfs(root.left, 10 * res) + dfs(root.right, 10* res)
 
     return dfs(root, 0)
+
+class Solution:
+    def sumNumbers(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+
+        total = 0
+        nodeQueue = deque([root])
+        numQueue = deque([root.val])
+        
+        while nodeQueue:
+            node = nodeQueue.popleft()
+            num = numQueue.popleft()
+            left, right = node.left, node.right
+            if not left and not right:
+                total += num
+            
+            if left:
+                nodeQueue.append(left)
+                numQueue.append(num * 10 + left.val)
+            if right:
+                nodeQueue.append(right)
+                numQueue.append(num * 10 + right.val)
+
+        return total

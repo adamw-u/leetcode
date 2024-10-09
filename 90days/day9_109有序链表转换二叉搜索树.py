@@ -34,6 +34,11 @@ class TreeNode:
         self.right = right
 
 def sortedListToBST(head):
+    """
+    思路:
+        1.找到中位数
+        2.root = mid.val ，递归构建左子树和右子树
+    """
 
     def getLinkMid(left , right):
         slow = left 

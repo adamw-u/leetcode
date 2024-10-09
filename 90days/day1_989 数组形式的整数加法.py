@@ -24,8 +24,12 @@
 # 输出：[1,0,0,0,0,0,0,0,0,0,0]
 # 解释：9999999999 + 1 = 10000000000
 
-# 优解
 class Solution(object):
+    """
+    思路：
+        1.如果len(k)>len(num),先将num List 长度与str长度对齐
+        2.开始进位加法操作
+    """
     def addToArrayForm(self, num, k):
         """
         :type num: List[int]
@@ -36,13 +40,14 @@ class Solution(object):
         carry = 0 
         if len(str(k))>len(num):
             num = [0]*(len(str(k))-len(num))+num
+        
         n = len(num)-1 
         while n>=0 and k>=0:
             i = num[n]
             kk = k%10 
-            res.append((i+k+carry)%10)
+            res.append((i+kk+carry)%10)
             carry = (i+kk+carry)//10 
             n -= 1
-            k = (k-kk)//10 
+            k = k//10 
         if carry!=0: res.append(carry)
         return res[::-1]
