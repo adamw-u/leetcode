@@ -24,3 +24,14 @@
 # 输出: false
 # 解释：机器人向左移动两次。它最终位于原点的左侧，距原点有两次 “移动” 的距离。我们返回 false，因为它在移动结束时没有返回原点。
 
+from collections import Counter
+class Solution:
+    def judgeCircle(self, moves: str) -> bool:
+        res = []
+        for i in moves:
+            res.append(i)
+        ct = Counter(res)
+
+        if ct['R'] == ct['L'] and ct['U'] == ct['D']:
+            return True
+        return False

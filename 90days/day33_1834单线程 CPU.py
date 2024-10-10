@@ -72,13 +72,13 @@ class Solution:
         res = []
 
         i = 0
-        ptime = new_tasks[0][0]
+        ptime = new_tasks[0][0] # 首次开始执行时间
         while len(res) < len(new_tasks):
             while i < len(new_tasks) and ptime >= new_tasks[i][0]: # 加入优先队列条件：前序任务开始时间+执行时间>=任务的开始时间
-                # 优先队列heapq通过第一个元素构造最小堆
+                # 优先队列heapq通过第一个元素（执行时间）构造最小堆
                 heapq.heappush(pq, (new_tasks[i][1], new_tasks[i][2], new_tasks[i][0]))
                 i += 1
-            if pq:
+            if pq: # 按照执行时间由小到大出队列
                 process, index, _ = heapq.heappop(pq)
                 ptime += process
                 res.append(index)

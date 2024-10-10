@@ -43,6 +43,14 @@
 from typing import List 
 import heapq  
 class Solution:
+    """
+    思路：
+        1.使用最小堆模拟优先队列
+        2.每次往[(1, 0), (-1, 0), (0, 1), (0, -1)]四个方向进行移动
+        3.把有效值加入到优先队列，每次pop出grid[i][j]最小的，继续移动
+        4.直到row == n-1 and col == n-1
+        5.返回上述过程中优先队列经过的最大值
+    """
     def swimInWater(self, grid: List[List[int]]) -> int:
         n = len(grid)
         pq = []
@@ -74,8 +82,13 @@ class Solution:
 
 # 二分法
 from typing import List 
-import heapq  
 class Solution:
+    """
+    思路：
+        1. dfs/bfs 进行判断当grid[nx][ny] <= mid 时能不能到达终点
+        2. 二分法left = max(grid[0][0], grid[-1][-1]), right = n * n - 1
+        3. 不断缩小范围直到left <= right
+    """
     def swimInWater(self, grid: List[List[int]]) -> int:
         n = len(grid)
 
@@ -93,12 +106,12 @@ class Solution:
             return False
         
         left = max(grid[0][0], grid[-1][-1])
-        right = n * n - 1
+        right = n * n - 1  # grid[i][j] 位于区间 [0, ..., N*N - 1] 内。
         while left <= right:
             mid = (left + right) // 2
             visited = set((0, 0))
             if dfs(0, 0, mid):
-                right = mid - 1
+                right = mid - 1   # True时候，mid - 1 否则当right==mid时候无法跳出循环
             else:
                 left = mid + 1
         return left
@@ -157,7 +170,7 @@ class Solution:
                 nx = x + dx
                 ny = y + dy
                 if 0 <= nx < n and 0 <= ny < n and grid[nx][ny] <= t:
-                    # 尝试合并相邻的平台
+                    # 尝试合并相邻的平台, 因为点是按照n*n铺开的，（x,y）用x * n + y代表 
                     uf.union(x * n + y, nx * n + ny)
                     
             

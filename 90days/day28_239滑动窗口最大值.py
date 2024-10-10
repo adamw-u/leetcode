@@ -31,7 +31,21 @@
 # 1  3  -1 [-3  5  3] 6  7       5
 # 1  3  -1  -3 [5  3  6] 7       6
 # 1  3  -1  -3  5 [3  6  7]      7
- 
+
+
+
+# 输入: nums = [1,3,-1,-3,2,3,6,7], 和 k = 3
+# 输出: [3,3,2,3,6,7]
+
+
+# 滑动窗口的位置                最大值
+# ---------------               -----
+# [1  3  -1] -3  2  3  6  7       3
+# 1 [3  -1  -3] 2  3  6  7       3
+# 1  3 [-1  -3  2] 3  6  7       2
+# 1  3  -1 [-3  2  3] 6  7       3
+# 1  3  -1  -3 [2  3  6] 7       6
+# 1  3  -1  -3  2 [3  6  7]      7
 
 # 提示：
 
@@ -41,17 +55,25 @@
 
 from collections import deque
 def maxSlidingWindow(nums, k):
+    """
+    思路：
+        1.利用单调递减队列
+        2.
+    """
     queue = deque()
     for i in range(k):
-        while queue and queue[-1] < nums[i]:
+        while queue and queue[-1] < nums[i]: 
+            # 队尾元素小于当前值，删除队尾值，直到队尾元素大于当前值
             queue.pop()
         queue.append(nums[i])
+    # [3, -1]
     
     res = [queue[0]]
     for i in range(k, len(nums)):
         # print(queue)
-        if queue[0] == nums[i - k]:
-            queue.popleft()    # 保证窗口覆盖大小为k？为什么不直接popleft，因为队首元素不一定是nums[i - k]所以加了这个判断
+        if queue[0] == nums[i - k]: # 如果队首元素是需要删除的i-k值，则出队列，保证窗口覆盖大小为k
+            queue.popleft()    # 队首元素在[queue[0]]已经加入，需要删除
+                               # 为什么不直接popleft，因为队首元素不一定是nums[i - k]所以加了这个判断
         while queue and queue[-1] < nums[i]:  # 维护单调队列，保证最大值在队首
             queue.pop()
         queue.append(nums[i])

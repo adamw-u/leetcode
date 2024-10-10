@@ -33,7 +33,7 @@ class Solution:
         res = []
         wordLen = len(words[0])
         wordsLen = len(words)
-        r = wordLen * wordsLen
+        r = wordLen * wordsLen  # words中单次长度相同
         hash_set = []
         ct = Counter(words)
         for i in range(len(s) - r + 1):

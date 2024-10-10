@@ -28,6 +28,7 @@
 from typing import List
 import random
 class Solution:
+    # 空间复杂度高
     def sortArray(self, nums: List[int]) -> List[int]:
         nums_len = len(nums)
         if nums_len<=1:
@@ -41,7 +42,15 @@ class Solution:
 from typing import List
 import random
 class Solution:
-
+    """
+    nums = [5,1,1,2,0,0]
+    思路：
+        1.原地排序：
+            1.1 mid 与 r 交换位置 ，固定选取的mid值在最右侧，方便对比
+            1.2 对比 l,r区间内，所有小于r的值往前走，大于r的往后走
+            1.2 设置指针 i = l-1，统计了小于nums[mid]值的个数
+        2.在l < r，范围递归第1步
+    """
     def randomized_partition(self, nums, l, r):
         pivot = random.randint(l, r)
         nums[pivot], nums[r] = nums[r], nums[pivot]
@@ -51,7 +60,7 @@ class Solution:
                 i += 1
                 nums[j], nums[i] = nums[i], nums[j]
         i += 1
-        nums[i], nums[r] = nums[r], nums[i]
+        nums[i], nums[r] = nums[r], nums[i] # 最后把r值放回到左边都是小于他的地方
         return i
 
     def randomized_quicksort(self, nums, l, r):

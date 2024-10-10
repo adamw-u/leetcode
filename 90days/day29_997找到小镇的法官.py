@@ -56,22 +56,22 @@
 # trust[i] 互不相同
 # trust[i][0] != trust[i][1]
 # 1 <= trust[i][0], trust[i][1] <= n
-
+from typing import List
 class Solution:
+    """
+    思路：
+        1.构造图的入度出度值，如果某个节点的入度为n-1，出度为0，则返回节点值
+    """
     def findJudge(self, n: int, trust: List[List[int]]) -> int:
-        jugeDictIn = {}
-        jugeDictOut = {}
-        for i in range(1, n+1):
-            if i not in jugeDictIn:
-                jugeDictIn[i] = []
-            if i not in jugeDictOut:
-                jugeDictOut[i] = []
+        graphIN = {i: [] for i in range(1, n + 1)}
+        for a, b in trust:
+            graphIN[b].append(a)
 
-        for i in trust:
-            jugeDictIn[i[1]].append(i[0])
-            jugeDictOut[i[0]].append(i[1])
+        graphOut = {i: [] for i in range(1, n + 1)}
+        for a, b in trust:
+            graphOut[a].append(b)
         
-        for i in jugeDictIn:
-            if len(jugeDictIn[i]) == n-1 and len(jugeDictOut[i])==0:
+        for i in graphIN:
+            if len(graphIN[i]) == n-1 and len(graphOut[i])==0:
                 return i
-        return -1
+        return -1 

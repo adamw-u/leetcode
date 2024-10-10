@@ -42,7 +42,7 @@
 from typing import List
 from collections import deque
 def possibleBipartition(n: int, dislikes: List[List[int]]):
-    # 构建邻接表
+    # 构建邻接表,无向图
     graph = {i: [] for i in range(1, N + 1)}
     for a, b in dislikes:
         graph[a].append(b)
@@ -50,16 +50,6 @@ def possibleBipartition(n: int, dislikes: List[List[int]]):
     
     # 用于存储每个节点的颜色，0表示未染色，1和-1表示两种不同的颜色
     color = {}
-    
-    # def dfs(node, c=1):  # 对所有与node关联节点染色，并进行判断
-    #     color[node] = c
-    #     for neighbor in graph[node]:
-    #         if neighbor not in color:
-    #             if not dfs(neighbor, -c):  # 对邻居节点染色-c
-    #                 return False
-    #         elif color[neighbor] == color[node]:  # 如果与邻居节点颜色一样返回false
-    #             return False
-    #     return True
 
     def bfs(node, c = 1):
         queue = deque([node])
@@ -70,9 +60,9 @@ def possibleBipartition(n: int, dislikes: List[List[int]]):
 
             for neighbor in graph[q]:
                 if neighbor not in color:
-                    color[neighbor] = -color[q] 
+                    color[neighbor] = -color[q] # 对邻居节点染色-c
                     queue.append(neighbor)
-                elif color[neighbor] == color[q]:
+                elif color[neighbor] == color[q]: # 如果与邻居节点颜色一样返回false
                     return False
         return True
 
@@ -94,4 +84,4 @@ def possibleBipartition(n: int, dislikes: List[List[int]]):
     return True, color
 N = 4
 dislikes = [[1,2],[1,3],[2,4]]
-possibleBipartition(N, dislikes)
+print(possibleBipartition(N, dislikes))

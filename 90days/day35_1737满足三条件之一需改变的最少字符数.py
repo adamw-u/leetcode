@@ -43,6 +43,8 @@ class Solution:
         ans1:a 中的 每个字母 在字母表中 严格小于 b 中的 每个字母 。
         ans2:b 中的 每个字母 在字母表中 严格小于 a 中的 每个字母 。
         ans3:a 和 b 都 由 同一个 字母组成。
+
+        核心思路：遍历以i为基准， 每次都变成a中的字母都比i小，b中的字母都比i大，遍历完成取最小值
         """
         count_a, count_b = [0] * 26, [0] * 26
         len_a, len_b = len(a), len(b)
@@ -52,7 +54,7 @@ class Solution:
             count_b[ord(cb) - ord('a')] += 1
 
         count_total = [ca + cb for ca, cb in zip(count_a, count_b)]
-        ans3 = len_a + len_b - max(count_total)   ## 第3种情况的答案：统计a b种出现次数最多的字母（假设为c），把剩余字母替换成c即可
+        ans3 = len_a + len_b - max(count_total)   ## 第3种情况的答案：统计a b中出现次数最多的字母（假设为c），把剩余字母替换成c即可
         ans1 = ans2 = len_a + len_b  ## 最多替换次数 len_a + len_b
         for i in range(1, 26): #第0个是a无法在变小了 
             ans1 = min(ans1, sum(count_a[i:]) + sum(count_b[:i]))  # a中字母严格小于b中字母
