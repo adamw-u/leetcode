@@ -35,6 +35,7 @@ def maxAreaOfIsland(grid):
     res = 0
     length = len(grid[0])
     height = len(grid)
+
     def bfs(x, y):
         queue = deque([(x, y)])
         area = 1
@@ -74,16 +75,15 @@ def maxAreaOfIsland(grid):
             if 0 <= nx < height and 0 <= ny < length and (nx, ny) not in visited:
                 if grid[nx][ny] == 1:
                     visited.add((nx, ny))
-                    area += dfs(x, y)
-            else:
-                return 0 
+                    area += dfs(nx, ny)
+
         return area 
     
     for i in range(height):
         for j in range(length):
             if grid[i][j] == 1:
-                visited = set()
-                res = max(res, bfs(i, j))
+                visited = set() # 构建集合防止重复   也可以把每次访问过的1修改成0 
+                res = max(res, dfs(i, j))
     return res
 
 grid = [[0,1,1],

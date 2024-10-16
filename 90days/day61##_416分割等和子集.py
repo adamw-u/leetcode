@@ -46,7 +46,7 @@ def canPartition(nums):
     for i, x in enumerate(nums):
         for j in range(1, s + 1):
             if j >= x:
-                dp[i + 1][j] = dp[i][j - nums[i]] or dp[i][j]
+                dp[i + 1][j] = dp[i][j - nums[i]] or dp[i][j]  # 选或者不选
             else:
                 dp[i + 1][j] = dp[i][j]
     

@@ -29,7 +29,9 @@ from functools import lru_cache
 class Solution:
     def canIWin(self, maxChoosableInteger: int, desiredTotal: int) -> bool:
         """
-        因为两位玩家游戏时都表现最佳,可以确定终止条件是当集合为空时失败
+        特判：
+            1.如果最大能选择的数字maxChoosableInteger比期望的总数desiredTotal要大，先手稳赢，返回True
+            2.如果能选择的所有数字总和比期望的总数desiredTotal要小，一定到达不了desiredTotal，先手稳输，返回False
         """
         seen = {}
         def dfs(remain, choices):
@@ -41,13 +43,16 @@ class Solution:
                 return seen[choices]
             
             for i, e in enumerate(choices):
-                if not dfs(remain - e, choices[:i] + choices[i + 1:]):
-                    seen[choices] = True
+                if not dfs(remain - e, choices[:i] + choices[i + 1:]):   # 排除其中一个元素后True，代表对手赢
+                    seen[choices] = True                                 # 排除其中一个元素后False，代表对手输，对手输所以seen[choices] = True   
                     return True
-            seen[choices] = False
+            seen[choices] = False  # 遍历choices都没有赢，所以seen[choices] = False
+            print(seen)
             return False
-
+        
         return dfs(desiredTotal, tuple([i + 1 for i in range(maxChoosableInteger)]))
 
 so = Solution()
-print(so.canIWin(12, 25))
+print(so.canIWin(4, 8))
+# {(3, 4): False, (2, 3, 4): True, (1, 3, 4): True, (1, 2, 4): False}
+# (1, 2, 4): False，所以seen[(1,2,3,4)] = True ，返回True结束遍历

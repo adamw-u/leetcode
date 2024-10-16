@@ -26,7 +26,7 @@
 # 动态规划
 def knightProbability(n: int, k: int, row: int, column: int) -> float:
     dp = [[0 for i in range(n)] for _ in range(n)]
-    dp[row][column] = 1
+    dp[row][column] = 1 # 初始概率为1
 
     for kk in range(k):
         cur = [[0 for i in range(n)] for _ in range(n)]
@@ -35,10 +35,10 @@ def knightProbability(n: int, k: int, row: int, column: int) -> float:
                 for x, y in [(1, -2), (-1, 2), (-1, -2), (1, 2), (2, 1), (-2, -1), (-2, 1), (2, -1)]:
                     nx, ny = r + x, c+ y 
                     if 0 <= nx < n and 0 <= ny < n:
-                        cur[nx][ny] += dp[r][c]/8
+                        cur[nx][ny] += dp[r][c]/8  
         dp = cur 
     print(dp)
-    return sum(map(sum, dp))
+    return sum(map(sum, dp))  # map(sum, dp) 按行累加 再次sum才是总的概率值
 
 
 ## dfs 复杂度高，需要加记忆

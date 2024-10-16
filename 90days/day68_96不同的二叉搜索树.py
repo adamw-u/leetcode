@@ -28,7 +28,7 @@ class Solution(object):
         dp[0] = 1 
         dp[1] = 1
         dp[2] = 2
-        dp[3] = dp[1] + dp[0] * dp[2] + dp[2] * dp[0]
+        dp[3] = dp[1] * dp[1] + dp[0] * dp[2] + dp[2] * dp[0]
         https://leetcode.cn/problems/unique-binary-search-trees/solutions/1153659/96-bu-tong-de-er-cha-sou-suo-shu-python-uuysm/?source=vscode
 
         比如[1,2,3,4,5,6] 此时需要求出dp[6]

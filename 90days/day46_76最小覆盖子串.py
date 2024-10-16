@@ -33,11 +33,12 @@ class Solution:
       for i, j in enumerate(s):
          cs[j] += 1
          while cs >= ct:
+            # 当ct中所有字符都存在于cs中，缩小newRight ，newLeft范围
             if newRight -  newLeft >= i - left:
-               newLeft, newRight = left, i
+               newLeft, newRight = left, i  # 因为我们保证它是唯一的答案。所以可以不断缩小范围
 
             cs[s[left]] -= 1
-            left += 1
+            left += 1     
 
       return "" if newLeft <0 else s[newLeft:newRight+1]
 

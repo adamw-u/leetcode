@@ -46,7 +46,7 @@ def coinChange(coins: List[int], amount: int) -> int:
     for i, x in enumerate(coins):
         for j in range(amount + 1):
             if j >= x:
-                dp[i+1][j] = min(dp[i][j], dp[i+1][j - x] + 1) # dp[i+1][j - x] + 1 代表完全背包问题中元素可以被多次选择
+                dp[i+1][j] = min(dp[i][j], dp[i+1][j - x] + 1) # dp[i+1][j - x] + 1 代表完全背包问题中元素可以被多次选择，与0-1背包问题不同
             else:
                 dp[i+1][j] = dp[i][j]
     return dp[n][amount] if dp[n][amount] != float('inf') else -1 
@@ -59,7 +59,7 @@ for cc in range(c):
 
 但如果是 dp[1][c]=min(dp[1][c],dp[0][c-1]+1)
 for cc in range(c):
-    dp[1][1] = 1, dp[1][2] = min(dp[1][2],dp[0][1]+1) = inf, dp[1][3] = inf, dp[1][4] = inf, dp[1][5] = inf
+    dp[1][1] = 1, dp[1][2] = min(dp[0][2],dp[0][1]+1) = inf, dp[1][3] = inf, dp[1][4] = inf, dp[1][5] = inf
 
 所以 dp[1][c]=min(dp[1][c],dp[1][c-1]+1), 是代表硬币可以重复使用的完全背包问题
 """

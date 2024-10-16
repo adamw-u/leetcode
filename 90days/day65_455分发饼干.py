@@ -42,12 +42,12 @@ def findContentChildren(g: List[int], s: List[int]) -> int:
     g.sort()
     s.sort()
 
-    si, gi = 0, 0
-    while gi < len(s) and si < len(g):
-        if s[gi] >= g[si]:
-            si += 1
-        gi += 1
-    return si
+    sj, gi = 0, 0  # 饼干与胃口初始化索引
+    while sj < len(s) and gi < len(g):
+        if s[sj] >= g[gi]: # s饼干尺寸 大于 胃口 
+            gi += 1  # 胃口索引+1
+        sj += 1 # 饼干索引+1， 饼干索引一直+直到遇到能满足的第一个小朋友的胃口
+    return gi # 返回符合要求的饼干个数
 
 g = [1, 2, 3]
 s = [3]

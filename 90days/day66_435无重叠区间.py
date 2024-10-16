@@ -41,7 +41,7 @@ class Solution(object):
             if end > intervals[i][0]:
                 count += 1
             else:
-                end = intervals[i][1]
+                end = intervals[i][1] # i之前的元素因满足end > intervals[i][0]，默认被移除了，所以end更新为intervals[i][1]
         return count
 
 so = Solution()

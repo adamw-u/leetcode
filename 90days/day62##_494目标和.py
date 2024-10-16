@@ -24,7 +24,13 @@
 # 一共有5种方法让最终目标和为3。
 from typing import List
 def findTargetSumWays(nums: List[int], target: int):
-    if target > sum(nums) or (sum(nums) - target) % 2 != 0:
+    """
+    思路：
+        1.首先排除target > sum(nums) 和 (sum(nums) - target) % 2 != 0 情况，(sum(nums) - target)剩余数值必须得通过+  或  -组合成0，即偶数
+        2.s = (sum(nums) - target) //2作为背包容量
+        参考：https://leetcode.cn/problems/target-sum/solutions/2119041/jiao-ni-yi-bu-bu-si-kao-dong-tai-gui-hua-s1cx/?source=vscode
+    """
+    if target > sum(nums) or (sum(nums) - target) % 2 != 0: 
         return 0 
     n = len(nums)
     s = (sum(nums) - target) //2

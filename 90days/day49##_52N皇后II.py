@@ -29,8 +29,13 @@
 
 def totalNQueens(n):
     """
-    主对角线判断条件：row1 - col1 == row2 - col2, 所以在集合里面添加一个r-i即可
-    副对角线判断条件：row1 + col1 == row2 + col2
+    思路：
+        1. 按行回溯遍历  backtrack(r)
+        2. 除行外，还需要判断列，对角线：
+            2.1. 列进行for循环遍历
+            2.2. 主对角线判断条件：row1 - col1 == row2 - col2, 所以在集合里面添加一个r-i即可
+            2.3. 副对角线判断条件：row1 + col1 == row2 + col2
+        3. 终止条件：r==n代表有一个解
     """
     col = set()
     dia1 = set()

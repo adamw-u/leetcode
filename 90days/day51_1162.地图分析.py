@@ -86,6 +86,14 @@
 from typing import List
 from collections import deque
 class Solution:
+    """
+    思路：
+        1.把所有陆地格子入队，陆地扩展到海洋
+        2.处理只有陆地或者海洋的特殊情况，返回-1。
+        3.遍历所有陆地节点的周围格子，若是海洋格子则入队，且距离distance + 1，bfs的每一层刚好与曼哈顿距离相对应
+        4.已遍历到的海洋格子置为1，避免重复计算
+        5.继续遍历已在队列中的格子的周围格子，直到没有海洋格子为止，此时队列为空，循环结束，返回distance
+    """
     def maxDistance(self, grid: List[List[int]]) -> int:
         ## 队列上下左右附近距离是1 ，BFS每遍历一层距离+1
         n = len(grid)

@@ -45,9 +45,11 @@ def change(amount: int, coins: List[int]) -> int:
     for i, x in enumerate(coins):
         for j in range(amount + 1):
             if j >= x:
+                # 用前i种硬币组成j的组合个数，加上新增i+1种硬币，组成j的组合个数
                 dp[i + 1][j] = dp[i][j] + dp[i + 1][j - x]
             else:
                 dp[i + 1][j] = dp[i][j] 
+    print(dp)
     return dp[n][amount]
 
 # 状态转移方程
@@ -55,6 +57,10 @@ def change(amount: int, coins: List[int]) -> int:
 # 如果选择第 i 种硬币，凑 j 元的方式等于前 i 种硬币凑 j - coins[i-1] 元的方式：dp[i][j] += dp[i][j - coins[i-1]]。
 # 递推方程为： dp[i][j]=dp[i−1][j]+dp[i][j−coins[i−1]]
 
-amount = 5
+dp = [[1, 0, 0], 
+      [0, 0, 0], 
+      [0, 0, 0]]
+
+amount = 5 # 2
 coins = [1, 2, 5]
 print(change(amount, coins))
