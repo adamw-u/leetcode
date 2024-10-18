@@ -28,14 +28,14 @@ class Solution:
                 res.append(path[:])
                 return res 
             for i, j in enumerate(nums):
-                if i > 0 and nums[i] == nums[i-1] and not visited[i-1]:
+                if i > 0 and nums[i] == nums[i-1] and visited[i-1]:
                     continue
                 if not visited[i]:
                     visited[i] = True
                     path.append(j)
                     dfs(visited, path)
                     path.pop()
-                    visited[i] = False 
+                    visited[i] = False # 回溯
  
         
         dfs(visited, [])

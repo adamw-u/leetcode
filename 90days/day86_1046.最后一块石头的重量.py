@@ -33,6 +33,13 @@
 from typing import List
 import heapq
 class Solution:
+    """
+    思路：
+        1. 每次返回两块重量最大的石头，进行粉碎操作
+        2. 粉碎后的石头继续加入的数据中
+        3. 直到只剩一/零块石头
+    根据思路容易想到堆，加入的石头可以自动堆化
+    """
     def lastStoneWeight(self, stones: List[int]) -> int:
         heap = []
         for i in stones:

@@ -29,6 +29,12 @@
 
 from typing import List
 class Solution(object):
+    """
+    思路：
+        1. 初始化空列表path
+        2. n==数组长度时候，终止递归
+        3. 用一个index变量记录每次递归使用到数组哪个index
+    """
     def subsets(self,  nums: List[int]) -> List[List[int]]:
 
         def dfs(nums, n, path = []): 

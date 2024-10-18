@@ -28,12 +28,12 @@ def findKthLargest(nums, k):
     heap = []
     for i,j in enumerate(nums):
         if i < k:
-            heapq.heappush(heap, j)
-        if i>=k and j > heap[0]:
+            heapq.heappush(heap, j) # 构建最小堆，堆大小为K
+        if i>=k and j > heap[0]:  # 所以j>对内最小元素的入堆，最终堆内元素是前k大的元素
             heapq.heappop(heap)
             heapq.heappush(heap, j)
         print(heap)
-    return heap[0]
+    return heap[0] # 堆顶为第k大元素
 
 def findKthLargest(nums, k):
     # 递归快排

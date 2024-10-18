@@ -38,7 +38,7 @@ class Trie:
             if w not in node:
                 node[w] = {}
             node = node[w] # 字典嵌套
-        node[self.end_of_string] = word
+        node[self.end_of_string] = word  # end是以 word结尾
 
     def search(self, word: str):
         res = []
@@ -51,7 +51,7 @@ class Trie:
             if self.end_of_string in node:
                 res.append(node[self.end_of_string])
         return res
-       
+    
 
     def startsWith(self, prefix: str):
         res = []
@@ -63,10 +63,17 @@ class Trie:
         return True
 
 class Solution:
+    """
+    思路：
+        1. smalls加入到搜索树
+        2. 遍历big进行搜索，如果能搜到small则记录下对应index
+        3. 返回每次可以搜到对应index的列表
+    """
     def multiSearch(self, big: str, smalls: List[str]) -> List[List[int]]:
         trie = Trie()
         for s in smalls:
             trie.insert(s)
+        print("trie",trie.alpha_dict)
         hit = collections.defaultdict(list)
 
         for i in range(len(big)):
@@ -81,6 +88,8 @@ class Solution:
         return res
 
 big = "mississippi"
+# trie {'i': {'s': {-1: 'is'}, -1: 'i'}, 'p': {'p': {'i': {-1: 'ppi'}}}, 'h': {'i': {-1: 'hi'}}, 
+#        's': {'i': {'s': {-1: 'sis'}}, 's': {'i': {'p': {'p': {'i': {-1: 'ssippi'}}}}}}}
 smalls = ["is","ppi","hi","sis","i","ssippi"]
 solution = Solution()
 print(solution.multiSearch(big, smalls))

@@ -18,7 +18,7 @@
 # 输入: sum("ap"), 输出: 3
 # 输入: insert("app", 2), 输出: Null
 # 输入: sum("ap"), 输出: 5
-    
+
 class MapSum:
 
     def __init__(self):

@@ -40,7 +40,7 @@ class Solution:
         q = []
         for x, cx in count.items():
             # 建堆
-            heapq.heappush(q, (-cx, x))
+            heapq.heappush(q, (-cx, x))  # x数值本身，cx是x的统计频次
         res = []
         while len(q) > 0:
             cx, x = heapq.heappop(q)

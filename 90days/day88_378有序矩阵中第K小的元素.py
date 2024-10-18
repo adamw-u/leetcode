@@ -28,6 +28,10 @@
 from typing import List 
 import heapq
 class Solution(object):
+    """
+    思路:https://leetcode.cn/problems/kth-smallest-element-in-a-sorted-matrix/solutions/311472/you-xu-ju-zhen-zhong-di-kxiao-de-yuan-su-by-leetco/?source=vscode
+        1. 参考官方题解，值应该是在一个锯齿形状
+    """
     def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
         n = len(matrix)
         # 利用最小堆k进行操作
@@ -37,10 +41,13 @@ class Solution(object):
 
         # 把前k-1小的值都pop出，返回第k小
         for i in range(k-1):
-            matrix_flat,row,col = heapq.heappop(heap)
+            # 第一个列是0
+            # 第二个列要对比 matrix[1][0] 和 matrix[0][1] 大小，pop最小值
+            # 不断进行对比，所以列/行逐步增加，直到pop到k-1
+            matrix_flat,row,col = heapq.heappop(heap)   
             if col != n-1:
-                heapq.heappush(heap, (matrix[row][col+1], row, col+1))
-        return heapq.heappop(heap)[0]
+                heapq.heappush(heap, (matrix[row][col+1], row, col+1))  # col每次加1
+        return heapq.heappop(heap)[0] # pop(第k小的值)
     
     # 二分法
     def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
@@ -50,7 +57,7 @@ class Solution(object):
             cnt = 0
             while r > 0 and c <= n-1:
                 if matrix[r][c] <= mid:
-                    # 从矩阵的左下角开始统计数量
+                    # 从矩阵的左下角开始统计小于等于mid数量
                     cnt += r + 1 
                     c += 1
                 else:

@@ -14,7 +14,7 @@
 # trie.insert("apple");
 # trie.search("apple"); // 返回 true
 # trie.search("app"); // 返回 false
-# trie.startsWith("app"); // 返回 true1
+# trie.startsWith("app"); // 返回 true
 # trie.insert("app");
 # trie.search("app"); // 返回 true
 # 说明:
@@ -60,3 +60,4 @@ class Trie:
 trie = Trie()
 trie.insert('apple')
 print(trie.alpha_dict, trie.end_of_string)
+# {'a': {'p': {'p': {'l': {'e': {-1: True}}}}}} -1

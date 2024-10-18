@@ -67,17 +67,24 @@ class UniFind:
 
 
 def findCircleNum(isConnected):
+    """
+    UniFind
+    """
     n = len(isConnected)
     uf = UniFind(n)
     for i in range(n):
         for j in range(n):
             if i != j and isConnected[i][j] == 1:
                 uf.union(i, j)
-    provinces = sum(uf.parent[i] == i for i in range(n))
+    provinces = sum(uf.parent[i] == i for i in range(n))  # 如果父节点是自己，说明他不跟其他节点相连，代表一个省份
     return provinces
+
 
 from collections import deque
 def findCircleNum(isConnected):
+    """
+    BFS
+    """
     n = len(isConnected)
     visited = set()
     provinces = 0
@@ -94,7 +101,7 @@ def findCircleNum(isConnected):
                     queue.append(j)
         
         if len(visited) == n:
-            return provinces
+            return provinces   # 退出遍历
 
 def findCircleNum(isConnected):
     n = len(isConnected)

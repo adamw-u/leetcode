@@ -40,9 +40,23 @@
 # 0 <= initial[i] < graph.length
 
 class Solution(object):
+    """
+    https://leetcode.cn/problems/minimize-malware-spread/solutions/2741790/zhi-bao-han-yi-ge-bei-gan-ran-jie-dian-d-ym39/
+    算法如下：
+        1.遍历 initial 中的节点 x。
+        2.如果 x 没有被访问过，那么从 x 开始 DFS，同时用一个 vis 数组标记访问过的节点。
+        3.DFS 过程中，统计连通块的大小 size。
+        4.DFS 过程中，记录访问到的在 initial 中的节点。
+        5.DFS 结束后，如果发现该连通块只有一个在 initial 中的节点，并且该连通块的大小比最大的连通块更大，那么更新最大连通块的大小，以及答案节点 x。如果一样大，就更新答案节点的最小值。
+        最后，如果没找到符合要求的节点，返回 min(initial)；否则返回答案节点。
+    """
     def minMalwareSpread(self, graph, initial):
         n = len(graph)
         def dfs(node, visited, size):
+            """
+            size：代表节点可以额外感染的点的个数
+            visited：感染的集合
+            """
             if node not in visited:
                 visited.add(node)
                 if node in initial:
@@ -66,7 +80,12 @@ class Solution(object):
         res = initial[0]
         size = 0
         for i, (v, s) in res_dict.items():
-             if s == 1:
+            """
+            一个大小为 k 的连通块内，如果只有一个节点 x 被感染（x 在 initial 中），那么移除 x 后，这个连通块不会被感染，从而让 M(initial) 减少 k。
+            而如果连通块内至少有两个节点被感染，无论移除哪个节点，仍然会导致连通块的所有节点被感染，M(initial) 不变。
+            所以我们要找的是只包含一个被感染节点的连通块，并且这个连通块越大越好。
+            """
+            if s == 1:
                   if len(v) > size:
                       size = len(v)
                       res = i
