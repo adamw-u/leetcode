@@ -30,6 +30,7 @@ class Solution:
     """
     思路：
         1. 首先明确每个柱子所在位置能接到的雨水是由其:左边柱子最大高度和右边柱子最大高度,与自身高度差决定的
+        (这里需要把每个柱子能接的水量分开看，不要多个一起看)
         2. 左边柱子最大高度 l_max = max(l_max, h[i])
         3. 右边柱子最大高度 r_max = max(r_max, h[i])
         4. 时空复杂度都是0(n)
@@ -54,7 +55,7 @@ class Solution:
     """
     思路：
         1. 双指针法，降低空间复杂度0(n)->0(1)
-        2. 用双指针来移动来表示每个指针当下对应的l_max, r_max
+        2. 用双指针移动来表示每个指针当下对应的l_max, r_max
         3. 理解难点，当处于left时候l_max 代表[0-left]最大点,r_max代表[r, n]的最大点，跟上面思路有不同，没有覆盖整个区间
             3.1 我们只要找到min(l_max， r_max) - h[i]即可
             3.2 考虑双指针的移动顺序，当l_max < r_max时候我们用l_max- h[i]求得面积，移动左指针
@@ -70,7 +71,7 @@ class Solution:
             r_max = max(r_max, height[right])
 
             # res += min(l_max, r_max) - height[i]
-            if l_max < r_max:
+            if l_max < r_max:                 # 移动面积小的那个
                 res += l_max - height[left]
                 left += 1  # 左指针移动
             else:
