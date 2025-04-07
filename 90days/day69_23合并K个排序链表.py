@@ -49,7 +49,7 @@ def merge2List(l1, l2):
         else:
             cur.next = l1
             l1 = l1.next
-        cur = cur.next
+        cur = cur.next # 注意cur指针后移
     
     if l1:
         cur.next = l1

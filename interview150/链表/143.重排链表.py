@@ -44,6 +44,8 @@ class Solution:
     def getMidList(self, head: Optional[ListNode]) -> None:
         low = head
         fast = head
+        # 如果使用条件fast.next and fast.next.next 需要保证fast.next是存在的，否则fast.next.next会出现NoneType 访问错误
+        # 当个数为奇数时候，还可能会导致fast 走到倒数第二个节点，low 可能偏前，无法输出正确中位数节点
         while fast and fast.next:
             low = low.next
             fast = fast.next.next 

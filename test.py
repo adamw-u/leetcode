@@ -17,3 +17,55 @@ def quickSort(nums, l, r):
     return i, nums
 
 quickSort(nums, 0, 5)
+
+# import numpy as np
+
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+# from typing import Optional
+# class Solution:
+#     def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+#         dummy = ListNode(0)
+#         dummy.next = head 
+#         pre = dummy 
+
+#         ## 统计链表长度
+#         tmp = head
+#         n = 0
+#         while tmp:
+#             n += 1 
+#             tmp = tmp.next 
+        
+#         while n - k >0:
+#             n -= k 
+#             cur = pre.next 
+#             tmp = None 
+#             for i in range(k):
+#                 nxt = cur.next
+#                 cur.next = tmp 
+#                 tmp = cur 
+#                 cur = nxt 
+            
+#             # 92 反转链表II的逻辑
+#             p0 = pre.next
+#             pre.next.next = cur 
+#             pre.next = tmp 
+
+#             pre = p0 
+#         return dummy.next
+
+# a = ListNode(1)
+# b = ListNode(2)
+# c = ListNode(3)
+# d = ListNode(4)
+# e = ListNode(5)
+
+# a.next = b 
+# b.next = c 
+# c.next = d
+# d.next = e    
+
+# s = Solution()
+# s.reverseKGroup(a, 2)
